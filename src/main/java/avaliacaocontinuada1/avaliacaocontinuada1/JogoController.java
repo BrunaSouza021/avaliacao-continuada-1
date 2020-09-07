@@ -56,6 +56,28 @@ public class JogoController {
         return ResponseEntity.ok(j);
     }
 
+    @PostMapping("/causarDanoInimigo/{id}/{danoCausado}")
+    public ResponseEntity causarDanoInimigo(@PathVariable int id, @PathVariable int danoCausado) {
+        Inimigo i = inimigos.get(id);
+
+        if (i != null) {
+            i.setHp(i.getHp() - danoCausado);
+        }
+
+        return ResponseEntity.ok(i);
+    }
+
+    @PostMapping("/causarDanoJogador/{id}/{danoCausado}")
+    public ResponseEntity causarDanoJogador(@PathVariable int id, @PathVariable int danoCausado) {
+        Jogador j = jogadores.get(id);
+
+        if (j != null) {
+            j.setHp(j.getHp() - danoCausado);
+        }
+
+        return ResponseEntity.ok(j);
+    }
+
     @DeleteMapping("/matarInimigo/{id}")
     public ResponseEntity matarInimigo (@PathVariable int id) {
         if(jogadores.size() >= id) {
